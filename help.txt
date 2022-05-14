@@ -1,0 +1,30 @@
+This is the list of possible commands:
+
+```help```
+ - Shows this help message
+
+```create <game_mode> [character_limit] [word_count]```
+ - Creates a game
+ - *game_mode* can be either:
+   - "whole_sentence" the participents will see the last sentence entirely
+   - "first_words" the participents will see the first *word_count* words of the previous sentence
+   - "last_words" the participents will see the last *word_count* words of the previous sentence
+   - "random_words" *word_count* consecutive words are selected at random to be shown to the next participent
+ - *character_limit* is the maximum number of characters one can post as a sentence for this game (default = 120)
+ - *word_count* the number of words one will be able to see (if *game_mode* is not "whole_sentence") (default = 3)
+
+```join <game_id>```
+ - Makes you join the game *game_id*
+
+```start <game_id>```
+ - Start the game *game_id* if you are the owner of this game
+
+```post <game_id> <sentence>```
+ - This command should be sent as a direct message, if you are the next player to play, adds the *sentence* to the game. You will be notified when it is your turn to write. A sentence may not take multiple lines, any line break will be ignored.
+ - Example: post 1234 Hello World.
+ - This would add "*Hello World.*" to the game 1234.
+
+```end|stop <game_id>```
+ - Ends a game. If the game was not started, destroy it, and if it was, messages back the complete tale created during this game.
+
+Where <*arg*> denotes a mandatory argument and [*arg*] an optional argument. All commands must be preceded by "ExquisiteCadaver" or "!ec", except when writing a direct message.
