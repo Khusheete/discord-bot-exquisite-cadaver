@@ -199,13 +199,13 @@ async def on_message(message):
 
             for g in current_games:
                 if g.game_id == game_id:
-                    error = g.push_sentence(message.author, sentence + " ")
+                    error, data = g.push_sentence(message.author, sentence + " ")
                     if error == game.GameError.WRONG_PARTICIPENT:
                         print(f"[{message.author.name}] Wrong Participent")
                         await message.author.send("It is not your turn to post a sentence.")
                     elif error == game.GameError.TOO_MUCH_CHARS:
                         print(f"[{message.author.name}] Too much chars")
-                        await message.author.send(f"The maximum number of characters you can post in this game is {g.character_limit}.")
+                        await message.author.send(f"The maximum number of characters you can post in this game is {g.character_limit}, you need to remove {data['diff']} chars.")
                     elif error == game.GameError.NOT_STARTED:
                         print(f"[{message.author.name}] Not Started")
                         await message.author.send("This game was not started yet.")

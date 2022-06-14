@@ -137,13 +137,13 @@ class ExquisiteCadaver:
         return self.participents[self.order_of_participents[self.current_turn % len(self.order_of_participents)]]
     
 
-    def push_sentence(self, participent, sentence: str) -> GameError:
+    def push_sentence(self, participent, sentence: str) -> (GameError, dict):
         if not self.started():
-            return GameError.NOT_STARTED
+            return GameError.NOT_STARTED, {}
         if participent != self.get_next_player():
-            return GameError.WRONG_PARTICIPENT
+            return GameError.WRONG_PARTICIPENT, {}
         if len(sentence) > self.character_limit:
-            return GameError.TOO_MUCH_CHARS
+            return GameError.TOO_MUCH_CHARS, {"diff": len(sentence) - self.character_limit}
         
         self.tale += [sentence]
         self.current_turn += 1
@@ -159,7 +159,7 @@ class ExquisiteCadaver:
         elif self.mode == GameMode.RANDOM_WORDS:
             self.given_info = get_cut_sentence(sentence, pos = randint(0, len(words) - self.word_count), count = self.word_count)
 
-        return GameError.OK
+        return GameError.OK, {}
     
 
     def get_tale(self, char_limit: int = 1500):
