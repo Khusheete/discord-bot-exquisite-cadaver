@@ -13,7 +13,9 @@ with open("help.txt") as f:
     HELP = f.read()
 
 
-client = discord.Client()
+intents = discord.Intents.default()
+intents.message_content = True
+client = discord.Client(intents = intents)
 current_games: list[game.ExquisiteCadaver] = []
 
 
